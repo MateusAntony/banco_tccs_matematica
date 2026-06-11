@@ -22,7 +22,12 @@ export default function HomePage() {
     fetch(API_URL)
       .then(r => r.json())
       .then((json: TCC[]) => {
-        setData(json)
+        const normalized = json.map(t => ({
+          ...t,
+          ano: Number(t.ano)
+        }))
+
+        setData(normalized)
         setLoading(false)
       })
       .catch(() => {
